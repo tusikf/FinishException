@@ -76,7 +76,6 @@ public class Main {
         try {
             fileWriter = new FileWriter(thename + ".txt", true);
             fileWriter.write(thename + " " + name + " " + secondname + " " + birthdate + " " + phonenumber + " " + gender + "\n");
-            System.out.println("Данные записаны в файл " + thename + ".txt");
             fileWriter.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
