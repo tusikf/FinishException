@@ -24,6 +24,8 @@
 Фамилия Имя Отчество дата _ рождения номер _ телефона пол
 */
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 public class Main {
@@ -35,37 +37,52 @@ public class Main {
                 "        Номер телефона - целые числа без знаков\n" +
                 "        Пол - символ латиницей f или m\n");
         String string = new String();
-        ArrayList<String> vvod = new ArrayList<>();
-        ArrayList<String> vvod2 = new ArrayList<>();
+        String[] vvod = new String[]{};
         Scanner scanner = new Scanner(System.in);
         string = scanner.nextLine();
+
         // Сплитуем строку по пробелу
-        vvod.add(Arrays.toString(string.split("\\s+")));
+        vvod = string.split("\\s+");
         for (String i: vvod) {
             System.out.println(i);
         }
-
-        // Из полученного списка удаляем "пустые" значения - если было несколько пробелов подряд.
-        for (int i = 0; i < vvod.size(); i++) {
-            if (vvod.get(i) == " ") {
-                vvod.remove(i);
-            }
-        }
-        // Но почему-то этот блок не работает. Не смогла понять почему. Предполагаем, что ввод будет производится с одним пробелом.
+        System.out.println(vvod.length);
 
         // Проверяем количество введенных данных
-        if (vvod.size() > 6) throw new RuntimeException("Вы ввели лишние данные");
-        if (vvod.size() < 6) throw new RuntimeException("Вы ввели не все данные");
+        if (vvod.length > 6) throw new IllegalArgumentException("Вы ввели лишние данные");
+        if (vvod.length < 6) throw new IllegalArgumentException("Вы ввели не все данные");
 
         // Делим введенные данные на отдельные части
-        String thename = vvod.get(0);
-        String name = vvod.get(1);
-        String secondname = vvod.get(2);
-        String birthdate = vvod.get(3);
-        String phonenumber = vvod.get(4);
-        char gender = vvod.get(5).charAt(0);
+        String thename = vvod[0];
+        String name = vvod[1];
+        String secondname = vvod[2];
+        String birthdate = vvod[3];
+        String phonenumber = vvod[4];
+        char gender = vvod[5].charAt(0);
 
         // Проверяем форматы введенных данных
+        if (birthdate.length() != 10) {
+            throw new IllegalArgumentException("Дата должна быть формата - dd.mm.yyyy");
+        }
+        if (!phonenumber.matches("\\d+") || phonenumber.length() != 11) {
+                throw new IllegalArgumentException("В номере телефона должно быть только 10 цифры.");
+            }
+        if ((gender != 'f') && (gender != 'm')) {
+                throw new IllegalArgumentException("Введен неверный формат пола.");
+            }
+
+        // Записываем в файл
+
+        FileWriter fileWriter = null;
+        try {
+            fileWriter = new FileWriter(thename + ".txt", true);
+            fileWriter.write(thename + " " + name + " " + secondname + " " + birthdate + " " + phonenumber + " " + gender + "\n");
+            System.out.println("Данные записаны в файл " + thename + ".txt");
+            fileWriter.close();
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
 
 
 
