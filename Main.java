@@ -40,7 +40,7 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         string = scanner.nextLine();
         // Сплитуем строку по пробелу
-        vvod.add(Arrays.toString(string.split(" ")));
+        vvod.add(Arrays.toString(string.split("\\s+")));
         for (String i: vvod) {
             System.out.println(i);
         }
@@ -57,8 +57,17 @@ public class Main {
         if (vvod.size() > 6) throw new RuntimeException("Вы ввели лишние данные");
         if (vvod.size() < 6) throw new RuntimeException("Вы ввели не все данные");
 
+        // Делим введенные данные на отдельные части
+        String thename = vvod.get(0);
+        String name = vvod.get(1);
+        String secondname = vvod.get(2);
+        String birthdate = vvod.get(3);
+        String phonenumber = vvod.get(4);
+        char gender = vvod.get(5).charAt(0);
+
         // Проверяем форматы введенных данных
-        
+
+
 
 
         System.out.println("До этого не дойдет - для проверки");
