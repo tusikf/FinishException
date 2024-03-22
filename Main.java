@@ -43,10 +43,9 @@ public class Main {
 
         // Сплитуем строку по пробелу
         vvod = string.split("\\s+");
-        for (String i: vvod) {
-            System.out.println(i);
-        }
-        System.out.println(vvod.length);
+//        for (String i: vvod) {
+//            System.out.println(i);
+//        }
 
         // Проверяем количество введенных данных
         if (vvod.length > 6) throw new IllegalArgumentException("Вы ввели лишние данные");
@@ -83,13 +82,7 @@ public class Main {
             throw new RuntimeException(e);
         }
 
-
-
-
-
-        System.out.println("До этого не дойдет - для проверки");
-
-
+        //System.out.println("До этого не дойдет - для проверки");
 
     }
 }
